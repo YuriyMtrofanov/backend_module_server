@@ -37,10 +37,23 @@ async function removeNote(id) {
     console.log(chalk.bold.red(`note with id ${id} was removed`)); // выводим сообщение
 }
 
+async function editNote(id, text) {
+    const notes = await getNotes(); // получаем все заметки
+    const changedNotes = notes.map((note) => {
+        if (note.id === id) {
+            return {title: text, id: id}
+        } return note
+    })
+    await fs.writeFile(notesPath, JSON.stringify(changedNotes)); // записываем данные в файл базы данных
+    console.log(chalk.bold.red(`note with id ${id} was edited`)); // выводим сообщение
+}
+
 module.exports = {
     addNote,
+    getNotes,
     printNotes,
-    removeNote
+    removeNote,
+    editNote
 };
 
 getNotes();
