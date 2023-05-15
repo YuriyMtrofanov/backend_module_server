@@ -18,7 +18,7 @@ document.addEventListener("click", async (event) => {
         );
     } else if (event.target.dataset.type === "edit") {
         const id = event.target.dataset.id;
-        const textContent = event.target.closest("li").innerText
+        const textContent = event.target.closest("li").innerText // Что-то никак не получается получить текст именно из родительского li без дочерних button
         const newTextContent = prompt("редактировать", textContent)
         if (newTextContent) {
             await edit(id, newTextContent);

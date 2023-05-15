@@ -13,7 +13,7 @@ app.set("views", "pages"); // меняем название паки с файл
 app.use(express.static(path.resolve(__dirname, "public"))) // подключаем к проекту указываем папку "public"
 app.use(express.urlencoded({
     extended: true
-})); // данный метод используем для декодирования данных
+}));
 app.use(express.json());
 
 app.get("/", async (request, response) => {
@@ -22,7 +22,6 @@ app.get("/", async (request, response) => {
         notes: await getNotes(),
         created: false
     });
-    // response.sendFile(path.join(basePath, "index.html"));
 });
 
 app.post("/", async (request, response) => {
@@ -32,12 +31,10 @@ app.post("/", async (request, response) => {
         notes: await getNotes(),
         created: true
     });
-    // response.sendFile(path.join(basePath, "index.html"));
 });
 
 app.delete("/:id", async (request, response) => {
     await removeNote(request.params.id)
-    // console.log(removeNote(request.params.id));
     response.render("index", {
         title: "Express App",
         notes: await getNotes(),
